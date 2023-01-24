@@ -1,45 +1,53 @@
-import React from "react";
-import { Space, Table, Tag } from "antd";
+import React, { useEffect, useState } from "react";
+import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import { getNumbers } from "@/src/services";
+import { History, HistoryTableItem } from "@/src/types";
 
 interface DataType {
-  key: string;
-  lastNumber: string;
+  key: string | number;
   average: string;
+  numbers: string;
 }
 
 const columns: ColumnsType<DataType> = [
   {
-    title: "Last Number",
-    dataIndex: "lastNumber",
-    key: "lastNumber",
-    width: "10%",
-  },
-  {
     title: "Average",
     dataIndex: "average",
     key: "average",
+    width: "10%",
+  },
+  {
+    title: "Numbers",
+    dataIndex: "numbers",
+    key: "numbers",
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: "1",
-    lastNumber: "5.0",
-    average: "average(1.0, 2.0, 3.0) = 2.0",
-  },
-  {
-    key: "2",
-    lastNumber: "5.0",
-    average: "average(1.0, 2.0, 3.0) = 2.0",
-  },
-  {
-    key: "3",
-    lastNumber: "5.0",
-    average: "average(1.0, 2.0, 3.0) = 2.0",
-  },
-];
+export const NumberTable: React.FC = () => {
+  const [data, setData] = useState<HistoryTableItem[]>([]);
 
-export const NumberTable: React.FC = () => (
-  <Table columns={columns} dataSource={data} pagination={false} />
-);
+  const getHistory = async () => {
+    let messagesData: History[] = await getNumbers();
+    let history = "",
+      _data = [];
+    for (let i = 0; i < messagesData.length; i++) {
+      if (i === 0) {
+        history = messagesData[i].lastNumber;
+      } else {
+        history += `, ${messagesData[i].lastNumber}`;
+      }
+      _data.push({
+        key: i,
+        average: String(messagesData[i].average),
+        numbers: history,
+      });
+    }
+    setData(_data);
+  };
+
+  useEffect(() => {
+    getHistory();
+  }, []);
+  return <Table columns={columns} dataSource={data} pagination={false} />;
+};

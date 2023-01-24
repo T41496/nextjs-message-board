@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export let messagesData = [
+let messagesData = [
   { key: 0, author: "DEFAULT AUTHOR", content: "DEFAULT CONTENT" },
 ];
 
