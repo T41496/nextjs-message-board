@@ -1,13 +1,15 @@
 import { MainLayout } from "@/src/layouts/Layout";
-import { MessageForm } from "@/src/components/Forms";
-import { MessageTable } from "@/src/components/Tables";
+import { MessageForm, MessageTable } from "@/src/components";
+import { Message } from "@/src/types";
 
-export const MessageContainer = () => {
+export const MessageContainer: React.FC<{ messages: Message[] }> = ({
+  messages,
+}) => {
   return (
     <MainLayout>
       <h1>Messages</h1>
       <MessageForm />
-      <MessageTable />
+      <MessageTable messages={messages} />
     </MainLayout>
   );
 };

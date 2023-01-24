@@ -1,7 +1,10 @@
+import { useRouter } from "next/router";
 import { Button, Form, Input } from "antd";
 import { useEffect, useState } from "react";
+import { addMessage } from "@/src/services";
 
 export const MessageForm = () => {
+  const router = useRouter();
   const [form] = Form.useForm();
   const [, forceUpdate] = useState({});
 
@@ -10,8 +13,9 @@ export const MessageForm = () => {
     forceUpdate({});
   }, []);
 
-  const onFinish = (values: any) => {
-    console.log("Finish:", values);
+  const onFinish = async (values: any) => {
+    const res = await addMessage(values);
+    router.reload();
   };
 
   return (

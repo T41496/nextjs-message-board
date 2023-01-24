@@ -1,6 +1,5 @@
 import { MainLayout } from "@/src/layouts/Layout";
-import { NumberForm } from "@/src/components/Forms";
-import { NumberTable } from "@/src/components/Tables";
+import { NumberForm, NumberTable } from "@/src/components";
 
 export const NumbersContainer = () => {
   return (

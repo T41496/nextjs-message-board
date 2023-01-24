@@ -1,3 +1,7 @@
+body {
+  margin: 0px !important;
+}
+
 .header {
   color: #fff !important;
   height: 64px !important;

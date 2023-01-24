@@ -1,9 +1,10 @@
 import React from "react";
-import { Space, Table, Tag } from "antd";
+import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import { Message } from "@/src/types";
 
 interface DataType {
-  key: string;
+  key: number | string;
   author: string;
   content: string;
 }
@@ -13,7 +14,7 @@ const columns: ColumnsType<DataType> = [
     title: "Author",
     dataIndex: "author",
     key: "author",
-    width: "20%"
+    width: "20%",
   },
   {
     title: "Content",
@@ -22,24 +23,6 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: "1",
-    author: "John Brown",
-    content: "New York No. 1 Lake Park",
-  },
-  {
-    key: "2",
-    author: "John Brown",
-    content: "New York No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    author: "John Brown",
-    content: "New York No. 1 Lake Park",
-  },
-];
-
-export const MessageTable: React.FC = () => (
-  <Table columns={columns} dataSource={data} pagination={false}/>
-);
+export const MessageTable: React.FC<{ messages: Message[] }> = ({
+  messages,
+}) => <Table columns={columns} dataSource={messages} pagination={false} />;
