@@ -1,0 +1,19 @@
+.header {
+  color: #fff !important;
+  height: 64px !important;
+  padding-inline: 50px !important;
+  line-height: 64px !important;
+  background-color: #001529 !important;
+}
+
+.header_item {
+  color: white;
+}
+
+.content {
+  padding: 0px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: calc(100vh - 64px) !important;
+}
